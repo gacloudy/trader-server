@@ -1,0 +1,9 @@
+---
+shares_mst:
+  all: SELECT code, shares_name, shares_name_en, industry_type, gathering_flg FROM shares_mst ORDER BY code
+share_date_history:
+  all: SELECT code, price_date, start_price, end_price, highest_price, lowest_price, amount, yesterday_price, slope5, slope10, slope15, slope20, variance5, variance10, variance15, variance20, slope5F, slope10F, slope15F, slope20F, variance5F, variance10F, variance15F, variance20F FROM share_date_history ORDER BY code, price_date
+  codeTerm: SELECT code, price_date, start_price, end_price, highest_price, lowest_price, amount, yesterday_price, slope5, slope10, slope15, slope20, variance5, variance10, variance15, variance20, slope5F, slope10F, slope15F, slope20F, variance5F, variance10F, variance15F, variance20F FROM share_date_history WHERE code = ? AND price_date >= ? AND price_date <= ? ORDER BY code, price_date desc
+analyze_result_monthly:
+  monthlyAggregation: SELECT a.code as code, a.analyze_key_code as analyzeKeyCode, sum(a.bnft) as sumBnft, sum(a.bnft)/sum(a.trader_count) as avgBnft, sum(a.trader_count) as count from analyze_result_monthly a inner join shares_price_movement_analyze_key b on a.analyze_key_code = b.analyze_key_code and b.trade_pattern = ? and b.bunrui = ?  WHERE a.code = ? and a.price_month >= ? and a.price_month <= ? GROUP BY a.code, a.analyze_key_code having count >= ? ORDER BY avgBnft desc  LIMIT 100
+  pk: SELECT code, analyze_key_code, price_month, bnft, trader_count FROM analyze_result_monthly WHERE code=? AND analyze_key_code=? AND price_month=?

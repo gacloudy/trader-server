@@ -1,0 +1,18 @@
+---
+tradePattern:
+  - cd: buy
+    name: 買い
+    name_en: buy
+  - cd: sale
+    name: 空売り
+    name_en: sale
+bunrui:
+  - cd: follow
+    name: 順張り
+  - cd: rebound
+    name: リバウンド
+way:
+  - cd: key
+    name: Analyze Key Code
+  - cd: span
+    name: Span
